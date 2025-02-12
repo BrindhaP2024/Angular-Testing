@@ -29,7 +29,7 @@ describe('DataComponent', () => {
 
   it('should display the initial data list', () => {
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelectorAll('li').length).toBe(3); // Apple, Banana, Cherry
+    expect(compiled.querySelectorAll('li').length).toBe(3);
   });
 
   it('should add a new item to the data list', () => {
