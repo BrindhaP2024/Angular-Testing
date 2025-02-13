@@ -13,6 +13,13 @@
 
 <!-- <app-user></app-user> -->
 
-<h1>Web Workers in Angular 19</h1>
-<button (click)="runHeavyTask()">Run Heavy Task</button>
+<h1>Web Workers in Angular</h1>
+<button (click)="Runheavytask()">Run Heavy Task</button>
 <p *ngIf="result">Result: {{ result }}</p>
+
+<!-- pwa -->
+<h1>Angular 19 PWA Demo</h1>
+<button (click)="installPWA()">Install App</button>
+<p *ngIf="isInstalled">App Installed!</p>
+
+<router-outlet></router-outlet>

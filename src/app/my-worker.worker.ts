@@ -11,4 +11,6 @@ function performHeavyCalculation(input: number): number {
     sum += i; // Simulating a CPU-intensive task
   }
   return sum;
+  console.log(performance.now());
+  console.log(performance.measure)
 }
