@@ -12,7 +12,8 @@ import { Component, signal, computed } from '@angular/core';
 })
 export class LinkedsignalComponent {
   count = signal(10);  // Base signal
-  doubleCount = computed(() => this.count() * 2);  // Linked Signal (Computed)
+  doubleCount = computed(() => this.count() * 2);
+
 
   updateCount(event: Event) {
     const inputValue = +(event.target as HTMLInputElement).value;
