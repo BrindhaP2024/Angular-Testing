@@ -7,5 +7,5 @@ export const selectCounterState = createFeatureSelector<CounterState>('counter')
 // Select the count value
 export const selectCount = createSelector(
   selectCounterState,
-  (state) => state?.count ?? 0  // Handle undefined state safely
+  (state) => state?.count ?? 0
 );

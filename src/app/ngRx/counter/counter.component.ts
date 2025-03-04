@@ -17,7 +17,7 @@ import { decrement, increment, reset } from '../counter.actions';
   imports:[CommonModule]
 })
 export class CounterComponent {
-  count$: Observable<number>; // Observable to hold count value
+  count$: Observable<number>; 
 
   constructor(private store: Store) {
     this.count$ = this.store.select(selectCount);

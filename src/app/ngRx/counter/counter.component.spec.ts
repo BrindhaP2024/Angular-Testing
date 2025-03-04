@@ -1,23 +1,37 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { selectCount } from '../counter.selectors';
+import { decrement, increment, reset } from '../counter.actions';
 
-import { CounterComponent } from './counter.component';
+@Component({
+  selector: 'app-counter',
+  standalone: true,
+  imports: [CommonModule],
+  template: `
+    <h1>Counter: {{ count$ | async }}</h1>
+    <button (click)="onIncrement()">Increment</button>
+    <button (click)="onDecrement()">Decrement</button>
+    <button (click)="onReset()">Reset</button>
+  `,
+})
+export class CounterComponent {
+  count$: Observable<number>;
 
-describe('CounterComponent', () => {
-  let component: CounterComponent;
-  let fixture: ComponentFixture<CounterComponent>;
+  constructor(private store: Store) {
+    this.count$ = this.store.select(selectCount);
+  }
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [CounterComponent]
-    })
-    .compileComponents();
+  onIncrement() {
+    this.store.dispatch(increment());
+  }
 
-    fixture = TestBed.createComponent(CounterComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+  onDecrement() {
+    this.store.dispatch(decrement());
+  }
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+  onReset() {
+    this.store.dispatch(reset());
+  }
+}

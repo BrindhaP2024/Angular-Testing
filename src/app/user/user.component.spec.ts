@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { UserComponent } from './user.component';
-import { FormsModule } from '@angular/forms'; // Import FormsModule if using ngModel
-import { CommonModule } from '@angular/common'; // Import CommonModule if needed
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 describe('UserComponent', () => {
   let component: UserComponent;

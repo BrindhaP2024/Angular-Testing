@@ -11,7 +11,7 @@ import { Component, signal, computed } from '@angular/core';
   styleUrls: ['./linkedsignal.component.css']
 })
 export class LinkedsignalComponent {
-  count = signal(10);  // Base signal
+  count = signal(10); 
   doubleCount = computed(() => this.count() * 2);
 
 

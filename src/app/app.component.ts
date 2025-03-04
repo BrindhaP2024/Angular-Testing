@@ -2,11 +2,14 @@ import { CommonModule } from '@angular/common';
 import { Component, HostListener, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
+import { AppShellComponent } from "./app-shell/app-shell.component";
+import { DataComponent } from "./data/data.component";
+import { CounterComponent } from './counter/counter.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, FormsModule,RouterOutlet],
+  imports: [CommonModule, FormsModule, RouterOutlet, AppShellComponent, DataComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
