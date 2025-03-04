@@ -5,11 +5,12 @@ import { RouterOutlet } from '@angular/router';
 import { AppShellComponent } from "./app-shell/app-shell.component";
 import { DataComponent } from "./data/data.component";
 import { CounterComponent } from './counter/counter.component';
+import { UserComponent } from "./user/user.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterOutlet, AppShellComponent, DataComponent],
+  imports: [CommonModule, FormsModule, RouterOutlet, AppShellComponent, DataComponent, UserComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })

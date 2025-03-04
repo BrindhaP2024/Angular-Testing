@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   selector: 'app-user',
   template: `
     <h2>{{ name }}</h2>
-    <p>{{ case }} years old</p>
+    <p>{{ case }} </p>
     <button (click)="incrementCase()">Increment test case</button>
     <button (click)="decrementCase()">Decrement test case</button>
   `,
