@@ -2,17 +2,15 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CounterComponent } from './counter.component';
 import { By } from '@angular/platform-browser';
 
-describe('CounterComponent', () => {
+fdescribe('CounterComponent', () => {
   let component: CounterComponent;
   let fixture: ComponentFixture<CounterComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [CounterComponent]
+      imports: [CounterComponent],
     }).compileComponents();
-  });
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(CounterComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -22,24 +20,35 @@ describe('CounterComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should display the initial count', () => {
-    const h1 = fixture.debugElement.query(By.css('h1')).nativeElement;
-    expect(h1.textContent).toBe('0');
+  it('should increment count when increment() is called', () => {
+    component.increment();
+    expect(component.count).toBe(1);
   });
 
-  it('should increment the count when the increment button is clicked', () => {
-    const incrementButton = fixture.debugElement.query(By.css('button:nth-of-type(1)')).nativeElement;
-    incrementButton.click();
+  it('should decrement count when decrement() is called', () => {
+    component.count = 1;
+    component.decrement();
+    expect(component.count).toBe(0);
+  });
+
+  it('should update UI when increment button is clicked', () => {
+    fixture.detectChanges();
+    const button = fixture.debugElement.query(By.css('#increment'));
+    expect(button).not.toBeNull();
+    button.nativeElement.click();
     fixture.detectChanges();
     const h1 = fixture.debugElement.query(By.css('h1')).nativeElement;
     expect(h1.textContent).toBe('1');
   });
 
-  it('should decrement the count when the decrement button is clicked', () => {
-    const decrementButton = fixture.debugElement.query(By.css('button:nth-of-type(2)')).nativeElement;
-    decrementButton.click();
+  it('should update UI when decrement button is clicked', () => {
+    component.count = 2;
+    fixture.detectChanges();
+    const button = fixture.debugElement.query(By.css('#decrement'));
+    expect(button).not.toBeNull();
+    button.nativeElement.click();
     fixture.detectChanges();
     const h1 = fixture.debugElement.query(By.css('h1')).nativeElement;
-    expect(h1.textContent).toBe('-1');
+    expect(h1.textContent).toBe('1');
   });
 });

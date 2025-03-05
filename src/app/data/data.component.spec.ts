@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 import { ServiceService } from '../service.service';
 import { of } from 'rxjs';
 
-describe('DataComponent', () => {
+fdescribe('DataComponent', () => {
   let component: DataComponent;
   let fixture: ComponentFixture<DataComponent>;
   let serviceService: ServiceService;

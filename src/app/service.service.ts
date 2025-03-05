@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class ServiceService {
-  private data: string[] = ['Apple', 'Banana', 'Cherry'];
+  private data: string[] = ['html', 'css', 'js'];
 
   constructor() { }
 

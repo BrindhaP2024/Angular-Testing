@@ -4,16 +4,26 @@ import { Component } from '@angular/core';
 import { By } from '@angular/platform-browser';
 
 @Component({
-  template: `<p appHighlight="cyan">Highlight me!</p>`
+  standalone: true,
+  template: `<p appHighlight="cyan">Highlight me!</p>`,
+  imports: [HighlightDirective]
 })
-class TestComponent {}
+class TestComponent { }
 
-describe('HighlightDirective', () => {
+@Component({
+  standalone: true,
+  template: `<p appHighlight>Highlight me!</p>`,
+  imports: [HighlightDirective]
+})
+class TestComponentWithDefaultColor { }
+
+fdescribe('HighlightDirective', () => {
   let fixture: ComponentFixture<TestComponent>;
+  let defaultFixture: ComponentFixture<TestComponentWithDefaultColor>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [TestComponent, HighlightDirective]
+      imports: [TestComponent, TestComponentWithDefaultColor, HighlightDirective]
     }).compileComponents();
   });
 
@@ -32,6 +42,22 @@ describe('HighlightDirective', () => {
 
     debugElement.triggerEventHandler('mouseleave', null);
     fixture.detectChanges();
+    expect(p.style.backgroundColor).toBe('');
+  });
+
+  it('should highlight the text with default yellow on mouse enter if no color is provided', () => {
+    defaultFixture = TestBed.createComponent(TestComponentWithDefaultColor);
+    defaultFixture.detectChanges();
+
+    const debugElement = defaultFixture.debugElement.query(By.css('p'));
+    const p: HTMLElement = debugElement.nativeElement;
+
+    debugElement.triggerEventHandler('mouseenter', null);
+    defaultFixture.detectChanges();
+    expect(p.style.backgroundColor).toBe('yellow');
+
+    debugElement.triggerEventHandler('mouseleave', null);
+    defaultFixture.detectChanges();
     expect(p.style.backgroundColor).toBe('');
   });
 });

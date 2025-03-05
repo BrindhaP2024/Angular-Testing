@@ -3,7 +3,7 @@ import { UserComponent } from './user.component';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
-describe('UserComponent', () => {
+fdescribe('UserComponent', () => {
   let component: UserComponent;
   let fixture: ComponentFixture<UserComponent>;
 

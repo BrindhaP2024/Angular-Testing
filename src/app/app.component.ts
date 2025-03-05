@@ -1,10 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit, OnDestroy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
 import { AppShellComponent } from "./app-shell/app-shell.component";
 import { DataComponent } from "./data/data.component";
-import { CounterComponent } from './counter/counter.component';
 import { UserComponent } from "./user/user.component";
 
 @Component({
@@ -14,11 +13,11 @@ import { UserComponent } from "./user/user.component";
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
   title: string = 'Hello, Unit-testing';
   firstValue: number = 0;
   secondValue: number = 0;
-  result: number | string = '';
+  result: number | string = 0;
   worker: Worker | undefined;
   isInstalled: boolean = false;
   deferredPrompt: any;
@@ -35,10 +34,18 @@ export class AppComponent implements OnInit {
   // Initialize Web Worker
   ngOnInit(): void {
     if (typeof Worker !== 'undefined') {
-      this.worker = new Worker(new URL('./my-worker.worker', import.meta.url));
+      this.worker = new Worker(new URL('./my-worker.worker.ts', import.meta.url), { type: 'module' });
       this.worker.onmessage = ({ data }) => {
         this.result = data;
       };
+    }
+  }
+
+  // Cleanup Web Worker
+  ngOnDestroy(): void {
+    if (this.worker) {
+      this.worker.terminate();
+      this.worker = undefined;
     }
   }
 
@@ -62,18 +69,15 @@ export class AppComponent implements OnInit {
   @HostListener('window:beforeinstallprompt', ['$event'])
   onBeforeInstallPrompt(event: Event) {
     event.preventDefault();
-    this.deferredPrompt = event;
+    this.deferredPrompt = event as any;  // Casting event properly
   }
 
-  installPWA() {
+  async installPWA() {
     if (this.deferredPrompt) {
       this.deferredPrompt.prompt();
-      this.deferredPrompt.userChoice.then((choiceResult: any) => {
-        if (choiceResult.outcome === 'accepted') {
-          this.isInstalled = true;
-        }
-        this.deferredPrompt = null;
-      });
+      const choiceResult = await this.deferredPrompt.userChoice;
+      this.isInstalled = choiceResult.outcome === 'accepted';
+      this.deferredPrompt = null;
     }
   }
 }

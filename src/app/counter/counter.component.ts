@@ -2,13 +2,12 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-counter',
-  imports:[],
+  standalone: true,
   template: `
     <h1>{{ count }}</h1>
-    <button (click)="increment()">Increment</button>
-    <button (click)="decrement()">Decrement</button>
+    <button id="increment" (click)="increment()">Increment</button>
+    <button id="decrement" (click)="decrement()">Decrement</button>
   `,
-
   styleUrls: ['./counter.component.css']
 })
 export class CounterComponent {
